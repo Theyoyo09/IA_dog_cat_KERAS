@@ -1,16 +1,19 @@
-# This is a sample Python script.
+# set the matplotlib backend so figures can be saved in the background
+import matplotlib
 
-# Press Maj+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+from sklearn.preprocessing import LabelBinarizer
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import classification_report
+import cv2
+from keras.models import Sequential
+from keras.layers import Dense
+from keras.optimizers import SGD
+from imutils import paths
+import matplotlib.pyplot as plt
+import numpy as np
+import argparse
+import random
+import pickle
+import os
 
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+matplotlib.use("Agg")
