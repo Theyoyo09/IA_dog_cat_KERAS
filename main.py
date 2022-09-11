@@ -5,7 +5,7 @@ Categories = ["cats", "dogs"]
 
 def prepare():
     Img_size = 150
-    img_array = cv2.imread('test1/test1/6162.jpg')
+    img_array = cv2.imread('test1/test1/6135.jpg')
     new_array = cv2.resize(img_array, (Img_size, Img_size))
     return new_array.reshape(-1, Img_size, Img_size, 3)
 
