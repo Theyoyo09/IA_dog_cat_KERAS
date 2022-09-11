@@ -7,16 +7,16 @@ from keras.preprocessing.image import ImageDataGenerator
 
 matplotlib.use("Agg")
 
-image_entrainement = "C:/Users/Yoan/PycharmProjects/IA_dog_cat/Training/"
-image_validation = "C:/Users/Yoan/PycharmProjects/IA_dog_cat/validation/"
+image_entrainement = "Training/"
+image_validation = "validation/"
 
-image_chien = "C:/Users/Yoan/PycharmProjects/IA_dog_cat/Training/dogs"
-image_chat = "C:/Users/Yoan/PycharmProjects/IA_dog_cat/Training/cats"
+image_chien = "Training/dogs"
+image_chat = "Training/cats"
 
-test = "C:/Users/Yoan/PycharmProjects/IA_dog_cat/test1/"
+test = "test1/"
 
-validation_chien = "C:/Users/Yoan/PycharmProjects/IA_dog_cat/validation/dogs"
-validation_chat = "C:/Users/Yoan/PycharmProjects/IA_dog_cat/validation/cats"
+validation_chien = "validation/dogs"
+validation_chat = "validation/cats"
 
 datagen = ImageDataGenerator(rescale=1./255)
 
@@ -55,7 +55,7 @@ metrics=['acc'])
 history = model.fit_generator(
  train_generator,
  steps_per_epoch=100,
- epochs=50,
+ epochs=100,
  validation_data=validation_generator,
  validation_steps=50)
 
