@@ -44,27 +44,19 @@ model.add(layers.Conv2D(128, (3, 3), activation='relu'))
 model.add(layers.MaxPooling2D((2, 2)))
 model.add(layers.Flatten())
 
-model.add(layers.Dropout(0.3))
+model.add(layers.Dropout(0.4))
 
 model.add(layers.Dense(512, activation='relu'))
 model.add(layers.Dense(1, activation='sigmoid'))
 model.compile(loss='binary_crossentropy',
-optimizer=optimizers.RMSprop(lr=1e-4),
+optimizer=optimizers.RMSprop(learning_rate=1e-4),
 metrics=['acc'])
 
-history = model.fit_generator(
+history = model.fit(
  train_generator,
  steps_per_epoch=100,
- epochs=100,
+ epochs=120,
  validation_data=validation_generator,
  validation_steps=50)
 
 model.save('Mon_model_chien_chat.h5')
-
-test_generator = datagen.flow_from_directory(
- test,
- target_size=(150, 150),
- batch_size=20,
- class_mode='binary')
-
-model.evaluate(test_generator)
