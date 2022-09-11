@@ -1,19 +1,20 @@
-# set the matplotlib backend so figures can be saved in the background
-import matplotlib
-
-from sklearn.preprocessing import LabelBinarizer
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import classification_report
 import cv2
-from keras.models import Sequential
-from keras.layers import Dense
-from keras.optimizers import SGD
-from imutils import paths
-import matplotlib.pyplot as plt
+import keras
 import numpy as np
-import argparse
-import random
-import pickle
-import os
+from PIL.ImageOps import grayscale
+from tensorflow.python.ops.image_ops_impl import rgb_to_grayscale
 
-matplotlib.use("Agg")
+Categories = ["cats", "dogs"]
+
+def prepare():
+    Img_size = 150
+    img_array = cv2.imread('test1/test1/179.jpg')
+    new_array = cv2.resize(img_array, (Img_size, Img_size))
+    return new_array.reshape(-1, Img_size, Img_size, 3)
+
+
+model = keras.models.load_model("Mon_model_chien_chat.h5")
+
+prediction = model.predict([prepare()])
+print(prediction)
+print( Categories[int(prediction[0][0])])
