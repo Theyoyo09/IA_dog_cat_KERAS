@@ -10,7 +10,7 @@ def prepare():
     return new_array.reshape(-1, Img_size, Img_size, 3)
 
 
-model = keras.models.load_model("Mon_model_chien_chat.h5")
+model = keras.models.load_model("best_model.h5")
 
 prediction = model.predict([prepare()])
 print(prediction)

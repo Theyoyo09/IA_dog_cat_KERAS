@@ -3,6 +3,8 @@ import matplotlib
 from keras import layers
 from keras import models
 from keras import optimizers
+from keras.callbacks import EarlyStopping, ModelCheckpoint
+
 from keras.preprocessing.image import ImageDataGenerator
 
 matplotlib.use("Agg")
@@ -44,18 +46,21 @@ model.add(layers.Conv2D(128, (3, 3), activation='relu'))
 model.add(layers.MaxPooling2D((2, 2)))
 model.add(layers.Flatten())
 
-model.add(layers.Dropout(0.4))
+model.add(layers.Dropout(0.5))
 
 model.add(layers.Dense(512, activation='relu'))
 model.add(layers.Dense(1, activation='sigmoid'))
 model.compile(loss='binary_crossentropy',
 optimizer=optimizers.RMSprop(learning_rate=1e-4),
-metrics=['acc'])
+metrics=['accuracy'])
+
+es = EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=200)
+mc = ModelCheckpoint('best_model.h5', monitor='val_accuracy', mode='max', verbose=1, save_best_only=True)
 
 history = model.fit(
  train_generator,
- steps_per_epoch=100,
- epochs=120,
+ steps_per_epoch=150,
+ epochs=150, callbacks=[es, mc],
  validation_data=validation_generator,
  validation_steps=50)
 
